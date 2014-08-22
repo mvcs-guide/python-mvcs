@@ -1,4 +1,4 @@
-web:
+samantha:
   build: .
   command: python run.py
   ports:

@@ -1,6 +1,6 @@
 web:
   build: .
-  command: python samantha/app.py
+  command: python run.py
   ports:
    - "5000:5000"
   volumes:
@@ -8,6 +8,8 @@ web:
   links:
    - redis
   environment:
+    FLASK_HOST: 0.0.0.0
+    FLASK_IS_DEBUG: true
     REDIS_HOST: redis_1
     REDIS_PORT: 6379
 

@@ -7,5 +7,9 @@ web:
    - .:/code
   links:
    - redis
+  environment:
+    REDIS_HOST: redis_1
+    REDIS_PORT: 6379
+
 redis:
   image: redis

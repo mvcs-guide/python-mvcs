@@ -2,7 +2,7 @@ flask
 
 # Databases
 redis
-MySQL-python
+psycopg2
 Flask-SQLAlchemy
 
 # Testing

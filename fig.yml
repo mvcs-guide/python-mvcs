@@ -1,4 +1,4 @@
-samantha:
+app:
   build: .
   command: python run.py
   ports:
@@ -9,6 +9,31 @@ samantha:
    - redis
    - db
   environment:
+    C_FORCE_ROOT: true
+    CELERY_BROKER_URL: redis://redis_1:6379
+    CELERY_ACCEPT_CONTENT: json
+    FLASK_HOST: 0.0.0.0
+    FLASK_IS_DEBUG: true
+    REDIS_HOST: redis_1
+    REDIS_PORT: 6379
+    SQLALCHEMY_DATABASE_URI: postgresql://postgres@db_1/postgres
+
+# this is duplicating most of the app container right now, would be nice to use inheritance 
+# or potentially use yaml anchors: http://atechie.net/2009/07/merging-hashes-in-yaml-conf-files/
+task:
+  build: .
+  command: celery -A samantha.tasks worker -l info
+  ports:
+   - "5001:5000"
+  volumes:
+   - .:/code
+  links:
+   - redis
+   - db
+  environment:
+    C_FORCE_ROOT: true
+    CELERY_BROKER_URL: redis://redis_1:6379
+    CELERY_ACCEPT_CONTENT: json
     FLASK_HOST: 0.0.0.0
     FLASK_IS_DEBUG: true
     REDIS_HOST: redis_1

@@ -1,5 +1,9 @@
 flask
 
+# Tasks
+celery
+pyinotify
+
 # Databases
 redis
 psycopg2

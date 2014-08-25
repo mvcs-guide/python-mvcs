@@ -1,2 +1,14 @@
 flask
+
+# Databases
 redis
+MySQL-python
+Flask-SQLAlchemy
+
+# Testing
+pytest==2.5.2
+coverage==3.7.1
+coveralls==0.4.2
+
+# Linting
+flake8==2.1.0

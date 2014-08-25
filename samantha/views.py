@@ -1,9 +1,4 @@
-from redis import Redis
-
-from samantha import app, config
-
-redis = Redis(host=config.get('REDIS_HOST'), port=config.get('REDIS_PORT'))
-
+from samantha import app, redis
 
 @app.route('/')
 def hello():

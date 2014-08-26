@@ -2,9 +2,9 @@ Samantha. An RSS reader built with practical Domain-Driven-Design.
 
 #### Installation
 
-If you're using OSX, then you'll need to install [Virtualbox](https://www.virtualbox.org/wiki/Downloads) & [Vagrant](http://www.vagrantup.com/downloads.html); Docker uses Linux-specific kernal features, so this is a must for Mac users.
+This guide assumes OSX, but can be adapted for different platforms accordingly.
 
-You'll then need [docker](docker.com) to run the provided containers. Luckily, this is easy to install. For OSX, run the following commands or check out the installation guide on [docker.com](http://docker.com).
+If you're using OSX, then you'll need to install [Virtualbox](https://www.virtualbox.org/wiki/Downloads) & [Vagrant](http://www.vagrantup.com/downloads.html); Docker uses Linux-specific kernal features so this is a must for Mac users. Once that is done run the following commands to install [Docker](http://docker.com/).
 
 ```
 $ curl https://raw.githubusercontent.com/noplay/docker-osx/1.1.1/docker-osx > /usr/local/bin/docker-osx
@@ -30,6 +30,6 @@ $ docker-osx shell
 $ fig up
 ```
 
-The above commands will first download a virtualmachine that docker will be ran in, and then download all the container parts needed to run the application. This is mostly a one time deal. Once that is finished, you should be able to travel to http://localdocker:5000/ in your browser to see the application.
+The above commands will first download a virtualmachine that docker will be ran in, and then download all the container parts needed to run the application. This is mostly a one time deal. Once that is finished, you should be able to travel to [http://localdocker:5000/](http://localdocker:5000/) in your browser to see the application.
 
 Cheers!

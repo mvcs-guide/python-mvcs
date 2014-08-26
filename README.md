@@ -38,7 +38,6 @@ $ fig --version
 Great. You should be able to run Samantha now. Let's give that a shot by running `fig up` on our machine. On OSX, you'll need to enable the `docker-osx shell` first in order to enable docker running in a virtualmachine.
 
 ```
-
 $ docker-osx shell
 $ fig up
 ```

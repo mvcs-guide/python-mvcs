@@ -6,7 +6,10 @@ from samantha import config
 app = Flask(__name__)
 
 
-# configure SQLAlchemy
+#
+# Configure SQLAlchemy
+# @see http://flask.pocoo.org/docs/0.10/patterns/sqlalchemy/
+#
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -30,7 +33,10 @@ def shutdown_session(exception=None):
     session.remove()
 
 
-# configure Celery
+#
+# Configure Celery
+# @see http://flask.pocoo.org/docs/0.10/patterns/celery/
+#
 from celery import Celery
 
 def make_celery(app):

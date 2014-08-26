@@ -3,12 +3,12 @@ app:
   command: python run.py
   ports:
    - "5000:5000"
-  volumes:
+  volumes: &volumes
    - .:/code
-  links:
+  links: &links
    - redis
    - db
-  environment:
+  environment: &environment
     C_FORCE_ROOT: true
     CELERY_BROKER_URL: redis://redis_1:6379
     CELERY_ACCEPT_CONTENT:  "json,pickle"
@@ -17,26 +17,12 @@ app:
     SQLALCHEMY_DATABASE_URI: postgresql://postgres@db_1/postgres
     SQLALCHEMY_ECHO: true
 
-# this is duplicating most of the app container right now, would be nice to use inheritance 
-# or potentially use yaml anchors: 
 task:
   build: .
   command: celery -A samantha.tasks worker -l info
-  ports:
-   - "5001:5000"
-  volumes:
-   - .:/code
-  links:
-   - redis
-   - db
-  environment:
-    C_FORCE_ROOT: true
-    CELERY_BROKER_URL: redis://redis_1:6379
-    CELERY_ACCEPT_CONTENT: "json,pickle"
-    FLASK_HOST: 0.0.0.0
-    FLASK_IS_DEBUG: true
-    SQLALCHEMY_DATABASE_URI: postgresql://postgres@db_1/postgres
-    SQLALCHEMY_ECHO: true
+  volumes: *volumes
+  links: *links
+  environment: *environment
 
 db:
   image: postgres

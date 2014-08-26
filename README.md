@@ -4,7 +4,7 @@ Samantha. An RSS reader built with practical Domain-Driven-Design.
 
 This guide assumes OSX, but can be adapted for different platforms accordingly.
 
-First, we'll want need [Virtualbox](https://www.virtualbox.org) & [Vagrant](http://www.vagrantup.com). Docker uses Linux-specific kernal features so this is a must for Mac users. The following commands assume [homebrew](http://brew.sh) & [cask](http://caskroom.io/) are installed and will get us taken care of from the command line:
+First, we'll need [Virtualbox](https://www.virtualbox.org) & [Vagrant](http://www.vagrantup.com). This is a must for Mac users because Docker uses Linux-specific, so we will be running Docker from within a VM. The following commands assume [homebrew](http://brew.sh) & [cask](http://caskroom.io/) are installed and will get us taken care of from the command line:
 
 ```
 $ brew cask install virtualbox

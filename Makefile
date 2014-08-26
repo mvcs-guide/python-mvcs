@@ -1,6 +1,6 @@
 .PHONY: test
-test: clean lint
-	@py.test -s samantha/tests
+test: clean
+	@PYTHONDONTWRITEBYTECODE=1 py.test -s samantha/tests
 
 .PHONY: lint
 lint:
@@ -9,3 +9,4 @@ lint:
 .PHONY: clean
 clean:
 	@find . -type f -name '*.pyc' -exec rm {} ';'
+

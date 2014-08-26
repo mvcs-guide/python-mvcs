@@ -7,7 +7,7 @@ pyinotify
 # Databases
 redis
 psycopg2
-Flask-SQLAlchemy
+SQLAlchemy==0.9.7
 
 # Testing
 pytest==2.5.2

@@ -1,14 +1,18 @@
-from samantha import db
+from sqlalchemy import Column, Integer, String
+
+from samantha import Base
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
+class User(Base):
+    __tablename__ = 'users'
+    
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), unique=True)
+    email = Column(String(120), unique=True)
 
-    def __init__(self, username, email):
-        self.username = username
+    def __init__(self, name=None, email=None):
+        self.name = name
         self.email = email
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % (self.name)

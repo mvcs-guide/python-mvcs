@@ -15,7 +15,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine(
-    config.get('SQLALCHEMY_DATABASE_URI'), 
+    config.get('SQLALCHEMY_DATABASE_URI'),
     convert_unicode=True
 )
 session = scoped_session(
@@ -28,6 +28,7 @@ session = scoped_session(
 Base = declarative_base()
 Base.query = session.query_property()
 
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     session.remove()
@@ -39,15 +40,19 @@ def shutdown_session(exception=None):
 #
 from celery import Celery
 
+
 def make_celery(app):
     celery = Celery(app.import_name, broker=app.config['CELERY_BROKER_URL'])
     celery.conf.update(app.config)
     TaskBase = celery.Task
+
     class ContextTask(TaskBase):
         abstract = True
+
         def __call__(self, *args, **kwargs):
             with app.app_context():
                 return TaskBase.__call__(self, *args, **kwargs)
+
     celery.Task = ContextTask
     return celery
 

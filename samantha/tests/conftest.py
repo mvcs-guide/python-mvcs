@@ -12,7 +12,7 @@ def app(request):
     ctx = app.app_context()
     ctx.push()
 
-    import samantha.views
+    import samantha.views  # noqa
 
     yield app
 
@@ -23,7 +23,8 @@ def app(request):
 def session(request):
     """Get new SQLAlchemy session per test"""
 
-    from samantha import session, Base, engine, models
+    from samantha import session, Base, engine
+    import samantha.models  # noqa
 
     session.remove()
     Base.metadata.drop_all(bind=engine)

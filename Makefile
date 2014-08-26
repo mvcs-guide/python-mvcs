@@ -1,5 +1,5 @@
 .PHONY: test
-test: clean
+test: clean lint
 	@PYTHONDONTWRITEBYTECODE=1 py.test -s samantha/tests
 
 .PHONY: lint

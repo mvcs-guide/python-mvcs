@@ -21,7 +21,7 @@ Once that is done run the following commands to install [Docker](http://docker.c
 ```
 $ curl https://raw.githubusercontent.com/noplay/docker-osx/1.1.1/docker-osx > /usr/local/bin/docker-osx
 $ chmod +x /usr/local/bin/docker-osx
-$ docker-osx shell
+$ docker-osx vagrant up --provision --provider virtualbox
 $ docker --version
 > Docker version 1.1.1, build bd609d2
 ```
@@ -38,6 +38,7 @@ $ fig --version
 Great. You should be able to run Samantha now. Let's give that a shot by running `fig up` on our machine. On OSX, you'll need to enable the `docker-osx shell` first in order to enable docker running in a virtualmachine.
 
 ```
+
 $ docker-osx shell
 $ fig up
 ```

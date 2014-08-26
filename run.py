@@ -1,7 +1,7 @@
 import os
 
 from samantha import app, config
-from samantha.views import *
+import samantha.views
 
 
 if __name__ == "__main__":

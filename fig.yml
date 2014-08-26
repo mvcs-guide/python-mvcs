@@ -1,17 +1,31 @@
-samantha:
+app:
   build: .
   command: python run.py
   ports:
    - "5000:5000"
-  volumes:
+  volumes: &volumes
    - .:/code
-  links:
+  links: &links
    - redis
-  environment:
+   - db
+  environment: &environment
+    C_FORCE_ROOT: true
+    CELERY_BROKER_URL: redis://redis_1:6379
+    CELERY_ACCEPT_CONTENT:  "json,pickle"
     FLASK_HOST: 0.0.0.0
     FLASK_IS_DEBUG: true
-    REDIS_HOST: redis_1
-    REDIS_PORT: 6379
+    SQLALCHEMY_DATABASE_URI: postgresql://postgres@db_1/postgres
+    SQLALCHEMY_ECHO: true
+
+task:
+  build: .
+  command: celery -A samantha.tasks worker -l info
+  volumes: *volumes
+  links: *links
+  environment: *environment
+
+db:
+  image: postgres
 
 redis:
   image: redis

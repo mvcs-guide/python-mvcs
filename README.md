@@ -21,7 +21,7 @@ Once that is done run the following commands to install [Docker](http://docker.c
 ```
 $ curl https://raw.githubusercontent.com/noplay/docker-osx/1.1.1/docker-osx > /usr/local/bin/docker-osx
 $ chmod +x /usr/local/bin/docker-osx
-$ docker-osx vagrant up --provision --provider virtualbox
+$ docker-osx vagrant provision --provision-with virtualbox
 $ docker --version
 > Docker version 1.1.1, build bd609d2
 ```
@@ -39,6 +39,7 @@ Great. You should be able to run Samantha now. Let's give that a shot by running
 
 ```
 $ docker-osx shell
+$ git clone git@github.com:breerly/samantha.git && cd samantha
 $ fig up
 ```
 

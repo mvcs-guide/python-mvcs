@@ -1,10 +1,12 @@
+import os
+
 from flask import Flask
 
 from samantha import config
 
 # configure Flask
 app = Flask(__name__)
-
+app.secret_key = os.urandom(32)
 
 #
 # Configure SQLAlchemy

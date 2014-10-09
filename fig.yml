@@ -2,7 +2,7 @@ app:
   build: .
   command: python run.py
   ports:
-   - "5000:5000"
+   - "5000"
   volumes: &volumes
    - .:/code
   links: &links
@@ -16,16 +16,49 @@ app:
     FLASK_IS_DEBUG: true
     SQLALCHEMY_DATABASE_URI: postgresql://postgres@db_1/postgres
     SQLALCHEMY_ECHO: true
+    SERVICE_NAME: app
 
 task:
   build: .
   command: celery -A samantha.tasks worker -l info
   volumes: *volumes
   links: *links
-  environment: *environment
+  environment:
+    <<: *environment
+    SERVICE_NAME: task
 
 db:
   image: postgres
+  environment:
+    SERVICE_NAME: postgres
 
 redis:
   image: redis
+  environment:
+    SERVICE_NAME: redis
+
+consul:
+  image: progrium/consul
+  ports:
+    - "8400:8400"
+    - "8500:8500"
+    - "8600:53/udp"
+  hostname: node1
+  command: -server -bootstrap
+
+registrator:
+  image: progrium/registrator
+  # using key/value for now, until the following is fixed:
+  # https://github.com/progrium/registrator/issues/23
+  command: "-ip localdocker consul://localdocker:8500/services"
+  volumes:
+    - /var/run/:/tmp/
+  environment:
+    SERVICE_NAME: registrator
+
+router:
+  image: progrium/ambassadord
+  ports:
+    - "80:10000"
+  command: "consul://localdocker:8500/services/app"
+
